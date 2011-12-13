@@ -47,7 +47,6 @@ public class DrawView extends View implements OnTouchListener {
 	}
 
 	public boolean onTouch(View view, MotionEvent event) {
-		//Log.d("Event", "" + event.getAction());
 		if (event.getAction() == MotionEvent.ACTION_UP) {
 			spases.add(points.size());
 		} else {
@@ -56,7 +55,6 @@ public class DrawView extends View implements OnTouchListener {
 			point.y = event.getY();
 			points.add(point);
 			invalidate();
-			Log.d(TAG, "point: " + point);
 		}
 		return true;
 	}
