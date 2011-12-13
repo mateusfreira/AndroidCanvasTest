@@ -16,6 +16,7 @@ public class DrawView extends View implements OnTouchListener {
 	private static final String TAG = "DrawView";
 
 	List<Point> points = new ArrayList<Point>();
+	List<Integer> spases = new ArrayList<Integer>();
 	Paint paint = new Paint();
 
 	public DrawView(Context context) {
@@ -32,25 +33,31 @@ public class DrawView extends View implements OnTouchListener {
 	@Override
 	public void onDraw(Canvas canvas) {
 		Point previous = null;
+		int i = 0;
 		for (Point point : points) {
-			if (previous != null) {
+
+			if (previous != null && !spases.contains(i)) {
 				canvas.drawLine(previous.x, previous.y, point.x, point.y, paint);
 			} else {
 				canvas.drawCircle(point.x, point.y, 1, paint);
 			}
 			previous = point;
+			i++;
 		}
 	}
 
 	public boolean onTouch(View view, MotionEvent event) {
-		// if(event.getAction() != MotionEvent.ACTION_DOWN)
-		// return super.onTouchEvent(event);
-		Point point = new Point();
-		point.x = event.getX();
-		point.y = event.getY();
-		points.add(point);
-		invalidate();
-		Log.d(TAG, "point: " + point);
+		//Log.d("Event", "" + event.getAction());
+		if (event.getAction() == MotionEvent.ACTION_UP) {
+			spases.add(points.size());
+		} else {
+			Point point = new Point();
+			point.x = event.getX();
+			point.y = event.getY();
+			points.add(point);
+			invalidate();
+			Log.d(TAG, "point: " + point);
+		}
 		return true;
 	}
 
