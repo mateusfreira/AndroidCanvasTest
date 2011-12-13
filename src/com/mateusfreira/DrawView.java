@@ -61,6 +61,7 @@ public class DrawView extends View implements OnTouchListener {
 
 	public void clear() {
 		points = new ArrayList<Point>();
+		spases =  new ArrayList<Integer>();
 		invalidate();
 	}
 }
